@@ -6,7 +6,7 @@ env:
   - PLAT=x86_64
   - UNICODE_WIDTH=32
   - WHEELHOUSE_UPLOADER_USERNAME=travis-worker
-  - secure: bodRUjo6nptcn4bVVkZt+Xdw4xMqyi6MPkMU+g8GuezpdSp7MyRMAGnwVZG6Ts8FRsgWElx9nfV9RUXFQstpK8rBPqH88z7qGIFodGZq+d/Oas1vwZP2xdnDcWTZpliPpmj5dHWPCP7aMRPDjjvVr2M6LID9Lfk08GbcXizXovl2q0jl9pBKAdfunT0VnbPsCngUSN+OxiI+9YbSENjnoG4nhrOhZWE8/9JlihG8eEaZxjJ7cGjZihQp4uBiMWVc3X7mgfMdSNg0jpw1f3o9SdJNxaTpQcTsVuQ9UpHE6QI6jpad5VpDuKFop3PyZDVwLxcl7vHownZp7LJSXfbo5PSMJmslt7N1kod5+a28VeS8Y6kjU7Rz1XZC803rdd8Sy6pyRm9AtGNw+uL4aEUph2dJx7bZAIXn1eVXMIETTW0H5wz4GofnP57iITccDkj7ZLAPF8Vg5Jawd65SylF7XVyjgxwWOETLeWyIu+1mdZv1j47QMtCCwnKY/wphfSEtG69r95YRDYQoN505gtGm9+D3lTQhtKzK1faURA9kaaVMs0qlU+75bnq9iKxxBEhIIs9Y8elLRTmKEQplD8YKwyrpaKam3X5QMwpy8c9q3DtpLBqXYmsib0ZRv4zhtarR6DwlC0kOqUvPIHSQHseQdZUFSvQGmMF1bhto3rt0BxY=
+  - secure: dsYp3pqTC2zbFM8WYCRHpyixjZuGrPov7tT99L/OMbkJBk/Zcuwy6l/nHopYdhOQEtO/Ub+BfSvOsMFEVLEn4SA6SG2jIt9elXsb/4dfL2sady6Znc0i9S97Qs1ynalkJYwnBYVcr2ZfOOnh1es95xS2PV/mHgTZ035bMRKv6YIdwkzRIuXaJtgxdhNi+T4yV2HrxARDD3FxInykzcclKEJSmDOnTtYfSbfldL+a1vJZvcZoDaQpugm//2EDNuk/3bILVYl1l+cZGILO+hxNmghq1hBm1Tb9LIlBEMp+nThBdFsIsx5SQtgxrn17+5wbfG3HuiM7LhkvuHm/eU2XMfEFsAhdZy28YtVjqxpuKg5G+sJyvdPeCDvlKKL9c4oMTSsAKtH0oPB/DTWvA3fwWqfnzXV28KTcnLYE3JY25P7cwYDPOkPb+UHkJK5OV9Aetu/GpUb0sVGHhWE67/NYfiiA0gHIJsbID4QT3Ijjdw6lYXnjvE0ZvXIui8mY+SgsWQ/bg73aoEWS47bGU3ulPQ+F8L2YK28kRLJRDwznUgi6ZaFpn3CknDurL2pnd1xsh8JP1fqNZ2A4AcFyMvHyuCn77A03ChBf5as9B9UGHWN5bAHKkOVfIZB4aNHG/4KK2tE2CrfkDm9dK0HUoPm1uRS1TU9AxG36dFkBGjUYwmU=
 language: python
 sudo: required
 dist: xenial
@@ -71,8 +71,8 @@ before_install:
 - eval $(python ./run.py build-spec build-spec.json)
 - git clone "${BUILD_SPEC_CLONE_URL}" "$REPO_DIR"
 - export BUILD_COMMIT="${BUILD_SPEC_COMMIT}"
-- printf "function run_tests {\n  pip install -U pytest\n python -m pytest --pyargs ${BUILD_SPEC_PACKAGE_NAME} \n}"
-  > config.sh
+- printf "function run_tests {\n  pip install -U pytest\n python -m pytest --pyargs
+  ${BUILD_SPEC_PACKAGE_NAME} \n}" > config.sh
 - source multibuild/common_utils.sh
 - source multibuild/travis_steps.sh
 - before_install
