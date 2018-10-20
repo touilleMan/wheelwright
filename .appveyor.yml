@@ -7,34 +7,42 @@ environment:
     - PYTHON: C:\Python37
       PYTHON_VERSION: 3.7
       PYTHON_ARCH: 32
+      COMPAT_CLASSIFIERS: "Operating System :: Microsoft :: Windows;Programming Language :: Python :: 3.7"
 
     - PYTHON: C:\Python37-x64
       PYTHON_VERSION: 3.7
       PYTHON_ARCH: 64
+      COMPAT_CLASSIFIERS: "Operating System :: Microsoft :: Windows;Programming Language :: Python :: 3.7"
 
     - PYTHON: C:\Python36
       PYTHON_VERSION: 3.6
       PYTHON_ARCH: 32
+      COMPAT_CLASSIFIERS: "Operating System :: Microsoft :: Windows;Programming Language :: Python :: 3.6"
 
     - PYTHON: C:\Python36-x64
       PYTHON_VERSION: 3.6
       PYTHON_ARCH: 64
+      COMPAT_CLASSIFIERS: "Operating System :: Microsoft :: Windows;Programming Language :: Python :: 3.6"
 
     - PYTHON: C:\Python35
       PYTHON_VERSION: 3.5
       PYTHON_ARCH: 32
+      COMPAT_CLASSIFIERS: "Operating System :: Microsoft :: Windows;Programming Language :: Python :: 3.5"
 
     - PYTHON: C:\Python35-x64
       PYTHON_VERSION: 3.5
       PYTHON_ARCH: 64
+      COMPAT_CLASSIFIERS: "Operating System :: Microsoft :: Windows;Programming Language :: Python :: 3.5"
 
     - PYTHON: C:\Python27
       PYTHON_VERSION: 2.7
       PYTHON_ARCH: 32
+      COMPAT_CLASSIFIERS: "Operating System :: Microsoft :: Windows;Programming Language :: Python :: 2.7"
 
     - PYTHON: C:\Python27-x64
       PYTHON_VERSION: 2.7
       PYTHON_ARCH: 64
+      COMPAT_CLASSIFIERS: "Operating System :: Microsoft :: Windows;Programming Language :: Python :: 2.7"
 
 # Don't generate builds for tags, PRs, or the master branch
 skip_tags: true
@@ -66,4 +74,5 @@ install:
 
 build_script:
     - pip install -Ur requirements.txt
+    - ps: if ( python -u run.py check-build-classifiers ) {} else { Exit-AppveyorBuild }
     - python -u run.py appveyor-build --build-spec build-spec.json

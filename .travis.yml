@@ -15,59 +15,75 @@ if: type = push AND tag IS blank AND branch =~ /^branch-for-/
 matrix:
   include:
   - os: linux
-    env: MB_PYTHON_VERSION=2.7
+    env:
+    - MB_PYTHON_VERSION=2.7
+    - COMPAT_CLASSIFIER="Operating System :: POSIX :: Linux;Programming Language :: Python :: 2.7"
   - os: linux
     env:
     - MB_PYTHON_VERSION=2.7
     - UNICODE_WIDTH=16
+    - COMPAT_CLASSIFIER="Operating System :: POSIX :: Linux;Programming Language :: Python :: 2.7"
   - os: linux
     env:
     - MB_PYTHON_VERSION=2.7
     - PLAT=i686
+    - COMPAT_CLASSIFIER="Operating System :: POSIX :: Linux;Programming Language :: Python :: 2.7"
   - os: linux
     env:
     - MB_PYTHON_VERSION=2.7
     - PLAT=i686
     - UNICODE_WIDTH=16
+    - COMPAT_CLASSIFIER="Operating System :: POSIX :: Linux;Programming Language :: Python :: 2.7"
   - os: linux
     env:
     - MB_PYTHON_VERSION=3.5
+    - COMPAT_CLASSIFIER="Operating System :: POSIX :: Linux;Programming Language :: Python :: 3.5"
   - os: linux
     env:
     - MB_PYTHON_VERSION=3.5
     - PLAT=i686
+    - COMPAT_CLASSIFIER="Operating System :: POSIX :: Linux;Programming Language :: Python :: 3.5"
   - os: linux
     env:
     - MB_PYTHON_VERSION=3.6
+    - COMPAT_CLASSIFIER="Operating System :: POSIX :: Linux;Programming Language :: Python :: 3.6"
   - os: linux
     env:
     - MB_PYTHON_VERSION=3.6
     - PLAT=i686
+    - COMPAT_CLASSIFIER="Operating System :: POSIX :: Linux;Programming Language :: Python :: 3.6"
   - os: linux
     env:
     - MB_PYTHON_VERSION=3.7
+    - COMPAT_CLASSIFIER="Operating System :: POSIX :: Linux;Programming Language :: Python :: 3.7"
   - os: linux
     env:
     - MB_PYTHON_VERSION=3.7
     - PLAT=i686
+    - COMPAT_CLASSIFIER="Operating System :: POSIX :: Linux;Programming Language :: Python :: 3.7"
   - os: osx
     language: generic
     env:
     - MB_PYTHON_VERSION=2.7
+    - COMPAT_CLASSIFIER="Operating System :: MacOS;Programming Language :: Python :: 2.7"
   - os: osx
     language: generic
     env:
     - MB_PYTHON_VERSION=3.5
+      - COMPAT_CLASSIFIER="Operating System :: MacOS;Programming Language :: Python :: 3.5"
   - os: osx
     language: generic
     env:
-    - MB_PYTHON_VERSION=3.6
+      - MB_PYTHON_VERSION=3.6
+      - COMPAT_CLASSIFIER="Operating System :: MacOS;Programming Language :: Python :: 3.6"
   - os: osx
     language: generic
     env:
-    - MB_PYTHON_VERSION=3.7
+      - MB_PYTHON_VERSION=3.7
+      - COMPAT_CLASSIFIER="Operating System :: MacOS;Programming Language :: Python :: 3.7"
 before_install:
 - pip install -Ur ./requirements.txt
+- python ./run.py check-build-classifiers || exit 0
 - eval $(python ./run.py build-spec build-spec.json)
 - git clone "${BUILD_SPEC_CLONE_URL}" "$REPO_DIR"
 - export BUILD_COMMIT="${BUILD_SPEC_COMMIT}"

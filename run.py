@@ -386,12 +386,34 @@ def check():
 
     # Check CI files
     token_var = 'GITHUB_SECRET_TOKEN'
-    for ci_file in ('.travis.yml', 'appveyor.yml'):
+    for ci_file in ('.travis.yml', '.appveyor.yml'):
         ci_path = ROOT / ci_file
         if not ci_path.exists():
             print_no("No {} found in root directory.".format(ci_file))
         else:
             print_ok("{} exists in root directory.".format(ci_file))
+
+
+@cli.command(name='check-build-classifiers')
+def check_build_classifiers():
+    """
+    Check project setup.py's classifiers against COMPAT_CLASSIFIERS env var to
+    determine if a build must be done for this configuration
+    """
+    ok = True
+    print_ok = lambda text: click.secho("\u2713 {}".format(text), fg='green')
+    print_no = lambda text: click.secho("\u2718 {}".format(text), fg='red')
+    with open('checkout/setup.py') as fd:
+        setup_src = fd.read()
+
+    for classifier in os.environment['COMPAT_CLASSIFIERS']:
+        if classifier not in setup_src:
+            print_no('Missing classifier `%s`' % classifier)
+            ok = False
+        print_no('Found classifier `%s`' % classifier)
+
+    if not ok:
+        sys.exit(1)
 
 
 if __name__ == "__main__":
