@@ -13,11 +13,17 @@ except ImportError:
 
 
 def print_ok(text):
-    print(u"\u2713 {}".format(text))
+    if os.name == 'posix':
+        print(u"\u2713 {}".format(text))
+    else:
+        print(u"[ok] {}".format(text))
 
 
 def print_no(text):
-    print(u"\u2718 {}".format(text))
+    if os.name == 'posix':
+        print(u"\u2718 {}".format(text))
+    else:
+        print(u"[ko] {}".format(text))
 
 
 def get_build_spec(build_spec_path):
