@@ -30,8 +30,11 @@ def main(org, project, commit):
         org=org, project=project, commit=commit
     )
     try:
-        with urlopen(url_target) as req:
+        req = urlopen(url_target)
+        try:
             setup_src = req.read()
+        finally:
+            req.close()
 
     except HTTPError as exc:
         print_no("Cannot retrieve `%s`: %s" % (url_target, exc))
