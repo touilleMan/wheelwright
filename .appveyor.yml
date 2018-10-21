@@ -52,6 +52,7 @@ branches:
 
 install:
     # Exit as early as possible if this configuration is not needed
+    - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
     - ps: if ( python check_build_classifiers.py build-spec.json ) {} else { Exit-AppveyorBuild }
     - echo "Filesystem root:"
     - dir C:\
