@@ -51,6 +51,8 @@ branches:
     - /^branch-for-/
 
 install:
+    # Exit as early as possible if this configuration is not needed
+    - ps: if ( python check_build_classifiers.py build-spec.json ) {} else { Exit-AppveyorBuild }
     - echo "Filesystem root:"
     - dir C:\
     - echo "Installed SDKs:"
@@ -74,5 +76,4 @@ install:
 
 build_script:
     - pip install -Ur requirements.txt
-    - ps: if ( python -u run.py check-build-classifiers ) {} else { Exit-AppveyorBuild }
     - python -u run.py appveyor-build --build-spec build-spec.json
