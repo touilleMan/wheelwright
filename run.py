@@ -204,11 +204,11 @@ def upload(build_spec, paths):
 def appveyor_build(build_spec):
     bs = get_build_spec(build_spec)
     run(['git', 'clone', bs['clone-url'], 'checkout'])
-    run(['pip', 'install', '-Ur', 'checkout\\requirements.txt'])
+    run(['pip', 'install', '-Ur', 'checkout/requirements.txt'])
     with cd('checkout'):
         run(['git', 'checkout', bs['commit']])
         run(['python', 'setup.py', 'bdist_wheel'])
-    wheels = glob.glob('checkout\\dist\\*.whl')
+    wheels = glob.glob('checkout/dist/*.whl')
     run(['pip', 'install'] + wheels)
     os.mkdir('tmp_for_test')
     with cd('tmp_for_test'):
@@ -313,8 +313,6 @@ def build(repo, commit, package_name=None):
         failed = False
         # The Github states are: "error", "failure", "success", "pending"
         for state in display_name_to_state.values():
-            if state == NA_STATE:
-                continue
             if state not in FINAL_STATES:
                 pending = True
             if state in BAD_STATES:
