@@ -249,7 +249,7 @@ def build(repo, commit, package_name=None):
     bs = {
         'clone-url': clone_url,
         'package-name': package_name,
-        'repo': repo,
+        'repo': '{}/{}'.format(user, package),
         'commit': commit,
         'upload-to': {
             'type': 'github-release',
